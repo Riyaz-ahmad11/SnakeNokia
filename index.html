@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnakeMenia</title>
+    <link rel="icon" href="images/snake1.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="loading">
+            <div class="loadingText">Loading...</div>
+            <div class="loader"></div>
+        </div>
+        <img src="images/snake2.png" class="right">
+       
+        <div class="board"></div>
+
+        <img src="images/setting.png"  class="settingImg">
+        
+        <div class="controller">
+           <img src="images/play.png" alt="play Image" class="pause-play">
+           <img src="images/retry.png" alt="retry image" class="retry">
+        </div>
+
+        <div class="moveToSettingImg">
+            <img src="images/cancelButton.png" class="cancelButton">
+
+            <div class="threeUpper">
+                <p class="textLevel">Set Level</p>
+                <p class="textSound">control music</p>
+                <p class="textSnakeLook">Snake color</p>
+            </div>
+             
+            <div class="controlsOfSetting">
+
+                <div class="level">
+
+                    <div class="easyDiv">
+                        <input type="radio" name="speed" id="easy" class="difficulty"  checked>
+                    <label for="easy" >Easy</label>
+                    </div>
+
+                  <div class="mediumDiv">
+                    <input type="radio" name="speed" id="medium" class="difficulty">
+                    <label for="medium" >Medium</label>
+                  </div>
+                    
+                    <div class="hardDiv">
+                        <input type="radio" name="speed" id="hard" class="difficulty" >
+                    <label for="hard" >Hard</label>
+
+                    </div>
+                </div>
+
+                <div class="sound">
+                    <img src="images/speaker.png" class="speaker" >
+                    <input type="range" min="0" max="100" step="1" value="100" id="volumeOfMusic">
+                </div>
+                <div class="snakeLook">
+
+                    <div class="differentLookDiv">
+                        <input type="radio" name="look" id="different" value="different" checked>
+                    <label for="different">Two colors</label>
+                    </div>
+
+                    <div class="sameLookDiv">
+                        <input type="radio" name="look" id="same" value="same">
+                    <label for="same">One color</label>
+                    </div>
+
+                </div>
+
+                
+            </div>
+        </div>
+        <div class="scoreAndLevelContainer">
+            <div class="tellsLevel">
+                <span class="levelValue"></span>
+            </div>
+
+            <div class="scoreContainer">
+                <div class="currentScore">
+                    <span class="currentScoreText"> Score </span>
+                    <span class="currentScoreVlaue"></span>
+                </div>
+
+                <div class="highScore">
+                    <img src="images/highestScoreCrown.png" class="crownImg">
+                    <span class="highScorevalue"></span>
+                </div>
+
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
