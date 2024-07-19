@@ -244,6 +244,7 @@ function activateMove(){
     
        // play music once game starts 
        gameMusic.loop = true;
+       gameMusic.volume =  (parseInt( volumeController.value) / 100); 
        gameMusic.play();
     
         controller.style.opacity =1; // make the pause-play and retry controllers icons visible once game started for forEver
