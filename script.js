@@ -32,6 +32,7 @@ let gamePaused = false;
 let wasGameOver = false;
 let score =0;
 let highScore =0;
+let deathWall = false;
 let inputDir = {x:0 , y:0};  // keeps track which direction user wants to move
 let food ={x:6,y:9 ,element:{}}; // intitial food location 
 let snakeBody =[{x:13,y:18,element :{}}];  // storing the element and its coordinate ->here it is initial coordinate
@@ -131,9 +132,14 @@ function LevelAndScore(){
 
 
 }
+function strikedToWall(){
+    if(snakeBody[0].x === 0 || snakeBody[0].x === 30 || snakeBody[0].y ===0 || snakeBody[0].y ===30) return true;
+    return false;
+}
 function gameEngine(){
    
-    if(ateSelf()){           
+     if(ateSelf() || (strikedToWall() && deathWall)){   
+                
         if(wasGameOver){
             gamePaused = true;
             return;
@@ -141,6 +147,7 @@ function gameEngine(){
         gameOver();
 
         return;
+
     }
 
     // show the level , currentScore and highest score of that level 
@@ -170,11 +177,14 @@ function gameEngine(){
         snakeBody[0].element.style.gridRowStart = snakeBody[0].y;
         snakeBody[0].element.style.gridColumnStart = snakeBody[0].x;
     }
-    //if gone outside the boundary - then bring the snake inside -> bring only head other part will follow the head
-    if(snakeBody[0].x === 0) snakeBody[0].x = 30;
-    else if(snakeBody[0].x === 31) snakeBody[0].x =0;
-    else if(snakeBody[0].y === 0) snakeBody[0].y = 30;
-    else if(snakeBody[0].y === 31) snakeBody[0].y=0;
+     // check if wall of death is turned on or off
+    if(!deathWall){
+        //if gone outside the boundary - then bring the snake inside -> bring only head other part will follow the head
+        if(snakeBody[0].x === 0) snakeBody[0].x = 30;
+        else if(snakeBody[0].x === 31) snakeBody[0].x =0;
+        else if(snakeBody[0].y === 0) snakeBody[0].y = 30;
+        else if(snakeBody[0].y === 31) snakeBody[0].y=0;
+    }
 }
 function gameOver(){   // think to pause RAF
     gameOverSound.pause();
@@ -405,4 +415,34 @@ snakeLook.addEventListener('click' , (e)=>{
 
 volumeController.addEventListener('input' , ()=>{
     gameMusic.volume = (parseInt( volumeController.value) / 100);  // value should be 0 to 1 but in range i have given [0,100] so divided by 100
+});
+
+// adding click event on the deathWall option to make the wall deadly for snake 
+
+ document.querySelector('.deathWall').addEventListener('click' ,(e)=>{
+    let target = e.target;
+
+    if(target === document.querySelector("#wall") ){  // *****// imp concept ->  clicking on the label also , this will get trigerred (checkbox click)because label is internally associated with input tag(here checkbox) 
+        //1. so if label is clicked -> it is like as if input tag is clicked (hence trigerring checkbox and hence on clickng the label this piece of code executes though not actually clicked checkbox) , 
+        // 2. also event listener added on label is like event listener added on input  
+        // reverse not true in both case
+
+
+        // console.log(target);  // prints checkbox -> clicked checkbox or label
+
+
+        if(deathWall === false) deathWall = true;
+        else {
+            deathWall = false;
+            let checkbox =document.querySelector('#wall');    // used checkbox instead of radio bcz checkbox check/uncheck works better when more than one radio input is used 
+    
+            checkbox.checked = false;
+        }
+        clickSound.pause();
+        clickSound.currentTime = 0; 
+        clickSound.play();
+     
+        initialState("deathWallClickEvent");
+    }
+      
 });
