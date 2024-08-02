@@ -253,7 +253,12 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
 }
-.level , .snakeLook{
+.level-setting{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;  
+}
+.level , .hard-wall, .snakeLook{
     height:60%;
     width:80%;
     border-radius: 1rem;
@@ -267,6 +272,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+.hard-wall{
+    height: 8%;
+    width: 65%;
+    box-sizing:content-box;
+    justify-content: center;
+    align-items: center;
 }
 .sound{
     width: 100%;
